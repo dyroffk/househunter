@@ -54,6 +54,7 @@ class Command(BaseCommand):
                 for field in self.DATE_FIELDS:
                     row[field] = None if row[field] in ('', None) else datetime.datetime.strptime(row[field], '%m/%d/%Y')
 
+                # TODO: What should be done about suspicious home_size values
                 try:
                     _, created = House.objects.get_or_create(**row)
                     if created == True:
