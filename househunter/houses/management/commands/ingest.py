@@ -12,7 +12,6 @@ class Command(BaseCommand):
     NULLABLES = ('bathrooms', 'home_size', 'last_sold_date', 'last_sold_price', 'property_size', 'rent_price',
                  'rentzestimate_amount', 'rentzestimate_last_updated', 'year_built', 'zestimate_amount')
 
-
     def add_arguments(self, parser):
         parser.add_argument('filepath', type=str)
 
