@@ -19,15 +19,18 @@ class House(models.Model):
         (VACANT_RESIDENTIAL, 'VacantResidentialLand'),
     )
 
-    bathroom_count = models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True)
-    bedroom_count = models.IntegerField()
+    # TODO: Would've expected zillow_id to be unique, but input data has some duplicates
+    #  Is the input data bad, or should we relax this constraint?
+    zillow_id = models.IntegerField(unique=True)
+    bathrooms = models.DecimalField(max_digits=3, decimal_places=1, blank=True, null=True)
+    bedrooms = models.IntegerField()
     home_size = models.IntegerField(blank=True, null=True) # In SqFt
     home_type = models.CharField(max_length=2, choices=HOME_TYPE_CHOICES)
     property_size = models.IntegerField(blank=True, null=True) # In SqFt
     year_built = models.IntegerField(blank=True, null=True)
 
     # May want to keep sale prices in separate model to track over time
-    last_sold = models.DateField(blank=True, null=True)
+    last_sold_date = models.DateField(blank=True, null=True)
     last_sold_price = models.IntegerField(blank=True, null=True)
 
     # Separate listing model may make sense if tracking listings on multiple platforms
